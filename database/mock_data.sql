@@ -94,7 +94,7 @@ INSERT INTO Attendee (`id`,`type`,`first_name`,`last_name`) VALUES
 	(61,"professional","Jos eph","Owen"),
 	(62,"professional","Imogene","Klein"),
 	(63,"professional","Mallory","Thomas"),
-	(64,"pr ofessional","Dane","Mcintosh");
+	(64,"professional","Dane","Mcintosh");
 
 -- Organizers
 INSERT INTO Organizer(`id`, `first_name`, `last_name`) VALUES 
