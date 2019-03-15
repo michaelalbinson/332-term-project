@@ -21,7 +21,7 @@ INSERT INTO Sponsor (`id`,`tier`,`name`) VALUES
 	(1,"platinum","Microsoft"),
 	(2,"platinum","Sibelius"),
 	(3,"platinum","Macromedia"),
-	(4,"silver","Alt avista"),
+	(4,"silver","Altavista"),
 	(5,"silver","Microsoft"),
 	(6,"platinum","Google"),
 	(7,"gold","Microsoft"),
@@ -65,7 +65,7 @@ INSERT INTO Attendee (`id`,`type`,`first_name`,`last_name`,`sponsor_id`) VALUES
 	(35,"sponsor","Brendan","Bu sh",17),
 	(36,"sponsor","Remedios","Peterson",14),
 	(37,"sponsor","Illana","Suarez",8),
-	(38,"sponsor", "Janna","Snyder",10),
+	(38,"sponsor","Janna","Snyder",10),
 	(39,"sponsor","Jolie","Walls",12),
 	(40,"sponsor","Hanna","Vang",17),
 	(41,"sponsor","Tanek","Baxter",9),
@@ -91,7 +91,7 @@ INSERT INTO Attendee (`id`,`type`,`first_name`,`last_name`) VALUES
 	(58,"professional","Garrison","Fry"), 
 	(59,"professional","Dillon","May"),
 	(60,"professional","Madonna","Barker"),
-	(61,"professional","Jos eph","Owen"),
+	(61,"professional","Joseph","Owen"),
 	(62,"professional","Imogene","Klein"),
 	(63,"professional","Mallory","Thomas"),
 	(64,"professional","Dane","Mcintosh");
@@ -151,41 +151,44 @@ INSERT INTO On_Committee (`organizer_id`,`subcommittee_id`) VALUES
 	(2,6),
 	(3,3);
 
+-- "2019-04-05" Friday
+-- "2019-04-06" Saturday
+
 INSERT INTO Session (`id`,`start_time`,`end_time`,`conf_room`,`name`) VALUES 
-	(1,"2019-12-27 04:14:49","2019-03-01 09:23:49","DUPUIS HALL","Web Development"),
-	(2,"2019-01-22 19:00:33","2019-03-15 16:03:25","ARC 90","Artificial Intelligence"),
-	(3,"2018-06-26 22:11:07","2019-05-16 23:47:58","DUPUIS HALL","Blockchain"),
-	(4,"2019-03-05 12:37:36","2019-09-02 22:54:50","DUPUIS HALL","Neural Networks"),
-	(5,"2018-12-23 16:52:05","2019-07-25 23:19:36","STIRLING 53","Blockchain"),
-	(6,"2019- 02-25 21:06:52","2019-12-11 13:24:40","DUPUIS HALL","Machine Learning"),
-	(7,"2018-10-17 13:26:39","2018-10-20 00:37:44","ARC 90","Neural Networks"),
-	(8,"2019-11-18 08:30:03","2019-03- 19 07:40:06","DUPUIS HALL","How to Make Pasta"),
-	(9,"2018-09-15 05:54:49","2019-05-26 06:38:21","ETHERINGTON 5","Neural Networks"),
-	(10,"2019-11-18 14:13:38","2018-02-21 21:40:12","ETHERINGTON 5","Machine Learning"),
-	(11,"2018-08-26 05:14:47","2019-10-28 22:19:38","DUNNING 101","Web Development"),
-	(12,"2019-05-16 16:23:53","2018-04-16 22:22:30","DUPUIS HALL","Machine Learning"),
-	(13,"2020-01-10 19:07:07","2018-12-17 04:22:32","STLIRLING 53","Blockchain"),
-	(14,"2018-02-16 01:20:47","2018-10-13 11:13:56","ARC 90","Artificial Intelligence"),
-	(15,"2018-08-20 12:37:26","2020-02-07 03:41:57","DUNNING 101","Machine Learning"),
-	(16,"2018-04-28 08:13:42","2019-05-27 01:45:19","WALLACE 10","Blockchain");
+	(1,"2019-04-05 18:00:00","2019-04-05 19:00:00","DUPUIS HALL","Welcoming Ceremonies"),
+	(2,"2019-04-05 19:00:00","2019-04-05 20:00:00","ARC 90","Artificial Intelligence"),
+	(3,"2019-04-05 19:00:00","2019-04-05 20:00:00","DUPUIS HALL","Blockchain"),
+	(4,"2019-04-05 20:00:00","2019-04-05 21:00:00","DUPUIS HALL","Neural Networks"),
+	(5,"2019-04-05 20:00:00","2019-04-05 21:00:00","STIRLING 53","Blockchain"),
+	(6,"2019-04-05 21:00:00","2019-04-05 22:00:00","DUPUIS HALL","Friday Keynote"),
+	(7,"2019-04-06 08:00:00","2019-04-06 10:00:00","ARC 90","Morning Welcome"),
+	(8,"2019-04-06 10:00:00","2019-04-06 12:00:00","DUPUIS HALL","Speaker: How to Make Pasta"),
+	(9,"2019-04-06 12:00:00","2019-04-06 13:00:00","ETHERINGTON 5","Lunch"),
+	(10,"2019-04-06 13:00:00","2019-04-06 15:00:00","ETHERINGTON 5","Machine Learning"),
+	(11,"2019-04-06 13:00:00","2019-04-06 15:00:00","DUNNING 101","Web Development"),
+	(12,"2019-04-06 15:00:00","2019-04-06 16:00:00","DUPUIS HALL","Machine Learning"),
+	(13,"2019-04-06 15:00:00","2019-04-06 16:00:00","STLIRLING 53","Blockchain"),
+	(14,"2019-04-06 16:00:00","2019-04-06 18:00:00","ARC 90","Artificial Intelligence"),
+	(15,"2019-04-06 18:00:00","2019-04-06 20:00:00","DUNNING 101","Dinner + Saturday Keynote"),
+	(16,"2019-04-06 20:00:00","2019-04-06 21:00:00","WALLACE 10","Drake Concert");
 
 INSERT INTO Speaking (`attendee_id`,`session_id`) VALUES 
 	(49,1),
-	(50,15),
+	(59,2),
 	(51,3),
-	(52,10),
-	(53,14),
-	(54,14),
+	(52,4),
 	(55,5),
-	(56,8),
+	(52,6),
 	(57,7),
+	(56,8),
 	(58,9),
-	(59,9),
-	(60,3),
+	(52,10),
+	(63,11),
 	(61,12),
 	(62,13),
-	(63,11),
-	(64,15);
+	(54,14),
+	(50,15);
+	
 
 
 
