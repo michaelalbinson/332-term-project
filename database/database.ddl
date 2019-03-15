@@ -8,7 +8,7 @@ USE cmpe_332_project;
 DROP TABLE IF EXISTS `Attendee`;
 CREATE TABLE `Attendee` (
 	`id` INT PRIMARY KEY AUTO_INCREMENT,
-	`type` ENUM('student', 'professional', 'sponsor') NOT NULL, 
+	`type` ENUM('student', 'professional', 'sponsor') NOT NULL DEFAULT "student", 
 	`room_number` VARCHAR(10) DEFAULT NULL,
 	`sponsor_id` INT DEFAULT NULL,
 	`first_name` VARCHAR(40) NOT NULL,
