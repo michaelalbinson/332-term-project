@@ -34,7 +34,7 @@ INSERT INTO Sponsor (`id`,`tier`,`name`) VALUES
 	(14,"silver","Lycos"),
 	(15,"gold","Cakewalk"),
 	(16,"silver","Adobe"),
-	(17,"bro nze","Borland"),
+	(17,"bronze","Borland"),
 	(18,"silver","Microsoft"),
 	(19,"bronze","Yahoo"),
 	(20,"silver","Borland");
