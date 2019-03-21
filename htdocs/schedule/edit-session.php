@@ -3,7 +3,7 @@
 <head>
 	<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" >
 	<link href="../css/style.css" type="text/css" rel="stylesheet" >
-	<title>Conference Intake</title>
+	<title>Edit Session</title>
 </head>
 <body>
 	<?php 
