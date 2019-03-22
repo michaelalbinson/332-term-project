@@ -14,5 +14,5 @@
 
 	$SQL = "UPDATE Session SET conf_room='$room', name='$name', start_time='$datetime' WHERE id=$session_id";
 	execute($SQL);
-	header('Location: '."/schedule");
+	header('Location: '."index.php");
 ?>

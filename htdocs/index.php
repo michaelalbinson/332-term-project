@@ -65,7 +65,7 @@
 				<p>There are <b><?php echo $total_events ?></b> events scheduled for the conference</p>
 				<canvas id="schedule" width="300" height="300"></canvas>
 				<br>
-				<a href="/schedule">View Schedule</a>
+				<a href="schedule/index.php">View Schedule</a>
 			</div>
 			<br>
 		</div>
@@ -90,7 +90,7 @@
 				<p>There are <b><?php echo $total_sponsors ?></b> sponsors for the conference</p>
 				<canvas id="sponsors" width="300" height="300"></canvas>
 				<br>
-				<a href="/sponsors">View All Sponsors</a>
+				<a href="sponsors/index.php">View All Sponsors</a>
 			</div>
 		</div>
 		<div class="col-md">
@@ -100,7 +100,7 @@
 				<p>Conference intake: <b>$<?php echo $tot_intake ?></b></p>
 				<canvas id="intake" width="300" height="300"></canvas>
 				<br>
-				<a href="/intake">View Breakdown</a>
+				<a href="intake/index.php">View Breakdown</a>
 			</div>
 		</div>
 	</div>
