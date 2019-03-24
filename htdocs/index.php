@@ -76,7 +76,7 @@
 				<p>There are <b><?php echo "$total_attendees" ?></b> attendees to the conference</p>
 				<canvas id="attendance" width="300" height="300"></canvas>
 				<br>
-				<a href="/attendees">View All Attendees</a>
+				<a href="attendees/index.php">View All Attendees</a>
 			</div>
 			<br>
 		</div>

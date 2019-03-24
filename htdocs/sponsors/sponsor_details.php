@@ -35,12 +35,12 @@
         }
 
         function buildSelect($name, $options, $selected) {
-			$res = "<select name='$name'>";
+			$res = "<select name='$name' id='sponsor_tier'>";
 			for ($i = 0; $i < count($options); ++$i) {
 				if ($options[$i] == $selected) {
-					$res = $res."<option value='$options[$i]' selected='selected'>$options[$i]</option>";
+					$res = $res."<option value='$options[$i]' selected='selected' >$options[$i]</option>";
 				} else {
-					$res = $res."<option value='$options[$i]'>$options[$i]</option>";
+					$res = $res."<option value='$options[$i]' >$options[$i]</option>";
 				}
 			}
 
@@ -67,22 +67,22 @@
     <br>
     <div class="row centered">
         <div class="col-md">
-            <form action="./update_sponsor.php" method ="GET">
+            <form action="./update_sponsor.php" method ="GET" id="info">
 
     		    <label for="sponsor_name">Sponsor Name: </label>
-		        <input type="text" name="sponsor_name" value="<?php echo $res['name'] ?>">      
+		        <input type="text" name="sponsor_name" value="<?php echo $res['name'] ?>" required>      
                 <br><br>
 
                 <label for="sponsor_tier">Sponsor Tier: </label>
                 <?php echo buildSelect("sponsor_tier", $tier_options, $tier) ?>
                 <br><br>
 
-                <label for="num_emails_sent"># Emails Name: </label>
-		        <input type="text" name="num_emails_sent" value="<?php echo $res['num_emails_sent'] ?>">     
+                <label for="num_emails_sent"># Emails Sent: </label>
+		        <input type="number" id="num_emails_sent" name="num_emails_sent" max = 5 value="<?php echo $res['num_emails_sent'] ?>" required>     
 
                 <br><br>               
                 <label for="email_address">Email Address: </label>
-		        <input type="text" name="email_address" value="<?php echo $res['email_address'] ?>">   
+		        <input type="text" name="email_address" value="<?php echo $res['email_address'] ?>" required>   
 
                 <br><br>
 		        <input class="btn btn-success" type="submit" value="Submit" />
@@ -120,5 +120,40 @@
 
 <br><br><br><br><br><br>
 	<?php include_once("../components/footer.php")?>
+
+    <script type="text/javascript">
+
+        var el_tier = document.getElementById("sponsor_tier");
+        var el_emails = document.getElementById("num_emails_sent");
+
+        function limit() {
+
+            var max_mail = 0;
+
+            if(el_tier.value == 'platinum') {
+                max_mail = 5;
+            } 
+            else if(el_tier.value == 'gold') {
+                max_mail = 3;
+            }
+            else if(el_tier.value == 'silver') {
+                max_mail = 1;
+            }
+            else if(el_tier.value == 'bronze') {
+                    max_mail = 0;
+            } 
+            else {
+                max_mail = 5;
+            }
+
+
+            el_emails.value=Math.min(max_mail,el_emails.value);
+        }
+
+        el_tier.onchange=limit;
+        el_emails.onchange=limit;
+           
+
+    </script>
 </body>
 </html>
