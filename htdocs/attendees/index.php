@@ -14,7 +14,8 @@
 	<?php
 		$students = execute("SELECT * FROM Attendee WHERE Attendee.type = 'Student' ");
 		$professionals = execute("SELECT * FROM Attendee WHERE Attendee.type = 'Professional' ");
-		$sponsors = execute("SELECT * FROM Attendee WHERE Attendee.type = 'Sponsor' ");
+		$sponsors = execute("SELECT Attendee.first_name, Attendee.last_name,  Attendee.ID, sponsor.name  
+			FROM Attendee , sponsor WHERE Attendee.type = 'Sponsor' and Attendee.sponsor_ID = sponsor.id");
 		$committee_options = execute("SELECT name FROM Subcommittee");
 
 		function getTableRow($row) {
@@ -24,6 +25,16 @@
 					"<td>".$row["last_name"]."</td>".
 				"</tr>";
 		}
+
+		function getSponsorRow($row) {
+			return "<tr>".
+					"<td>".$row["ID"]."</td>".
+					"<td>".$row["first_name"]."</td>".
+					"<td>".$row["last_name"]."</td>".
+					"<td>".$row["name"]."</td>".
+				"</tr>";
+		}
+
 
 		function buildSelect($next) {
 			return "<option value=\"".$next["name"]."\">".$next["name"]."</option>";
@@ -77,11 +88,12 @@
 					<th>ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
+					<th>Sponsor Name</th>
 					<th></th>
 				</tr>
 				<?php
 					while ($row = $sponsors->fetch()) {
-						echo getTableRow($row);
+						echo getSponsorRow($row);
 					}
 				?>
 			</table>
