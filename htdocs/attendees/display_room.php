@@ -14,13 +14,14 @@
 	<?php
 		$id = $_GET['room_id'];
 		$room_members = execute("SELECT * FROM Attendee WHERE Attendee.room_number = ".$id);
+		$room = singleRowExecute("SELECT * FROM Room WHERE id=".$id);
 		function getTableRow($row) {
-                        return "<tr>".
-                                        "<td>".$row["id"]."</td>".
-                                        "<td>".$row["first_name"]."</td>".
-                                        "<td>".$row["last_name"]."</td>".
-                                "</tr>";
-                }
+	        return "<tr>".
+                        "<td>".$row["id"]."</td>".
+                        "<td>".$row["first_name"]."</td>".
+                        "<td>".$row["last_name"]."</td>".
+	                "</tr>";
+        }
 
 	?>
 
@@ -40,11 +41,15 @@
                                         <th></th>
                                 </tr>
                                 <?php
+                                	$cnt = 0;
                                         while ($row = $room_members->fetch()) {
+                                        		$cnt++;
                                                 echo getTableRow($row);
                                         }
                                 ?>
                         </table>
+                        <br>
+                        <strong><i>Beds Used: <?php echo $cnt."/".$room["num_beds"] ?></i></strong>
                 </div>
 	</div>
 	<br><br><br>

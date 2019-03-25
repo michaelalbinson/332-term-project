@@ -13,7 +13,10 @@
 
 	<?php
 		$subcomm = $_GET["subcommittee"];
-		$SQL = "SELECT Organizer.id, first_name, last_name FROM Organizer, Subcommittee WHERE name = '".$subcomm."'";
+		$SQL = "SELECT Organizer.id, first_name, last_name FROM Organizer ".
+			"INNER JOIN On_Committee ON Organizer.id=On_Committee.organizer_id ".
+			"INNER JOIN Subcommittee ON Subcommittee.id=On_Committee.subcommittee_id ".
+			"WHERE Subcommittee.name = '".$subcomm."'";
 		$members = execute($SQL);
 
 		function getTableRow($row) {
@@ -25,27 +28,27 @@
 		}
 	?>
 	<hr>
-				<br>
-				<div class="row">
-								<div class="col-lg centered">
-												<?php
-													echo "<h2>Members of ".$subcomm."</h2>"
-												?>
-												<hr>
-												<table>
-																<tr>
-																				<th>ID</th>
-																				<th>First Name</th>
-																				<th>Last Name</th>
-																				<th></th>
-																</tr>
-																<?php
-																				while ($row = $members->fetch()) {
-																								echo getTableRow($row);
-																				}
-																?>
-												</table>
-								</div>
+	<br>
+	<div class="row">
+		<div class="col-lg centered">
+			<?php
+			echo "<h2>".$subcomm." Subcommittee Members</h2>"
+			?>
+			<hr>
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th></th>
+				</tr>
+				<?php
+					while ($row = $members->fetch()) {
+									echo getTableRow($row);
+					}
+				?>
+			</table>
+		</div>
 	</div>
 	<br><br><br>
 	<h5><a href='../attendees'>Back</a></h5>

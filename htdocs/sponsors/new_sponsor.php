@@ -8,28 +8,28 @@
 
 <body>
     <br>
-    <h3> Add a new sponsor </h3> 
-    <br>
+    <h3>Add a Sponsor</h3> 
+    <hr>
 
     <form action="" method="post">
 
-        <label>Sponsor Name :</label>
+        <label>Sponsor Name:</label>
         <input type="text" name="name" id="name" required="required" placeholder="Please Enter Name"/><br /><br />
 
-        <label>Sponsor Email :</label>
+        <label>Sponsor Email:</label>
         <input type="text" name="email" id="email" required="required" placeholder="Please Enter email"/><br /><br />
 
         <label>Sponsor Tier:</label>
         <select name="sponsor_tier">
-            <option name="platinum" value="platinum">platinum</option>
-            <option name="gold" value="gold">gold</option>
-            <option name="silver" value="silver">silver</option>
-            <option name="bronze" value="bronze">bronze</option>
+            <option name="platinum" value="platinum">Platinum</option>
+            <option name="gold" value="gold">Gold</option>
+            <option name="silver" value="silver">Silver</option>
+            <option name="bronze" value="bronze">Bronze</option>
         </select>
 
         <br>
         <br>
-        <input class="btn btn-success" type="submit" value="submit" name="submit"/><br />
+        <input type="submit" value="Submit" name="submit" class="btn btn-success" /><br />
 
     </form>
 
@@ -44,9 +44,8 @@
             $tier = $_POST["sponsor_tier"];
             $email = $_POST["email"];
 
-            singleRowExecute("INSERT INTO sponsor (name, tier, num_emails_sent, email_address) 
+            singleRowExecute("INSERT INTO Sponsor (name, tier, num_emails_sent, email_address) 
             VALUES ('$name', '$tier', 0, '$email')");
-            //$result = mysqli_query($conn, $SQL);
 
             header("location: index.php");
             exit;
@@ -54,7 +53,7 @@
 
 ?>
 
-    <br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
 	<?php include_once("../components/footer.php")?>
 </body>
 </html>

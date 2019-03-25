@@ -6,10 +6,10 @@
 	<title>Conference Sponsors</title>
 </head>
 <body>
-
-	<br><br><br>
-	<h1> This is a list of sponsors </h1> 
-	<br><br><br>
+	<br>
+	<h1>Conference Sponsors</h1> 
+	<hr>
+	<br>
 
 	<?php 
 		// Loads in database connection, called $connection
@@ -17,11 +17,11 @@
 	?>
 
 	<?php
-		$result = execute("SELECT * FROM sponsor");
+		$result = execute("SELECT * FROM Sponsor");
 
 
 		function getTableRow($row) {	
-			if ($row["num_emails_sent"] == NULL ) {
+			if ($row["num_emails_sent"] == NULL) {
 				$row["num_emails_sent"] = 0; 
 			}
 
@@ -31,9 +31,9 @@
 
 			return "<tr>".
 			 "<td> <a href='sponsor_details.php?id=".$row['id'] . "'>".$row['name']."</a></td>". //builds the link
-			 "<td>" . $row['tier'] . "</td>".
+			 "<td>" .ucfirst($row['tier']). "</td>".
 			 "<td>" . $row['num_emails_sent'] . "</td>".
-			 "<td>" . $row['email_address'] . "</td>".
+			 "<td><a href='mailto:".$row['email_address']."'>" . $row['email_address'] . "</a></td>".
 			 "</tr>";
 		}	
 
@@ -51,13 +51,11 @@
                 echo getTableRow($row);
             } 
     	?>    
-	</table>			
-
-	<br><br><br>
-
-	<input class="btn btn-success" type= "button" onclick="location.href='new_sponsor.php';" value="Add a new Sponsor" />
-	<br><br>
+	</table>
+	<br>
+	<input type="button" onclick="location.href='new_sponsor.php';" value="Add Sponsor" class="btn btn-primary"/>
 	<input class="btn btn-success" type= "button" onclick="location.href='jobs.php';" value="View all Jobs" />
+	
 
 	<br><br><br><br><br><br><br>
 	<?php include_once("../components/footer.php")?>

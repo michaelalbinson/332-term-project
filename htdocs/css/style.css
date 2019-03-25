@@ -16,6 +16,10 @@ body, .centered {
 	margin: 10px 0;
 }
 
+.half {
+	width: 50% !important;
+}
+
 footer {
 	height: 100px;
 	background-color: black;

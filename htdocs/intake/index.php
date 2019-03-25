@@ -14,17 +14,17 @@
 
 	<?php 
 		// for attendee analytics
-		$res = singleRowExecute("SELECT count(id) as num_attendees FROM attendee");
+		$res = singleRowExecute("SELECT count(id) as num_attendees FROM Attendee");
 		$total_attendees = $res["num_attendees"];
 
 		$res = execute("SELECT count(*) AS num, type FROM Attendee GROUP BY type");
 		$row = $res->fetchAll();
-		$null = $row[0]["num"];
-		$students = $row[1]["num"];
-		$professionals = $row[2]["num"];
-		$sponsors = $row[3]["num"];		
+		// $null = $row[0]["num"];
+		$students = $row[0]["num"];
+		$professionals = $row[1]["num"];
+		$sponsors = $row[2]["num"];		
 
-		$num_spons = singleRowExecute("SELECT count(id) as num_sponsors FROM sponsor");
+		$num_spons = singleRowExecute("SELECT count(id) as num_sponsors FROM Sponsor");
 		$num_sponsors = $num_spons["num_sponsors"];
 
 		// for sponsor analytics
@@ -37,10 +37,10 @@
 		$bronze_num = $row[0]["num"];
 		$silver_num = $row[1]["num"];
 		$gold_num = $row[2]["num"];
-		$platinum_num = $row[3]["num"];		
+		$platinum_num = $row[3]["num"];
 
-		$spons = execute("SELECT * FROM sponsor");
-		$attendee = execute("SELECT * FROM attendee");
+		$spons = execute("SELECT * FROM Sponsor");
+		$attendee = execute("SELECT * FROM Attendee");
 
 		$bronze_intake = $bronze_num * 1000;
 		$silver_intake = $silver_num * 3000;
@@ -70,10 +70,10 @@
 				}
 
 				return "<tr>".
-				"<td>" .$row['first_name'] . "</td>". 
-				"<td>" .$row['last_name'] . "</td>". 
-				"<td>" . $row['type'] . "</td>".
-				"<td>" . $cost . "</td>".
+					"<td>" .$row['first_name'] . "</td>". 
+					"<td>" .$row['last_name'] . "</td>". 
+					"<td>" . ucfirst($row['type']) . "</td>".
+					"<td>" . $cost . "</td>".
 				"</tr>";
 			} 
 		}
@@ -95,7 +95,7 @@
 
 			return "<tr>".
 			 "<td> <a href='sponsor_details.php?id=".$row['id'] . "'>".$row['name']."</a></td>". //builds the link
-			 "<td>" . $row['tier'] . "</td>".
+			 "<td>" . ucfirst($row['tier']) . "</td>".
 			 "<td>" . $cost . "</td>".
 			 "</tr>";
 		}

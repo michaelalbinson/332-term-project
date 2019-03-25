@@ -8,29 +8,31 @@
 <body>
     <?php 
 		// Loads in database connection, called $connection
-		include_once("../config/database.php")
+		include_once("../config/database.php");
+
+        $referrer = $_SERVER['HTTP_REFERER'];
 	?>
 
     <?php 
         $id = $_GET['id'];
 
 
-        $res = singleRowExecute("SELECT * FROM sponsor WHERE id = $id");
+        $res = singleRowExecute("SELECT * FROM Sponsor WHERE id = $id");
         $tier = $res['tier'];
         $company_name = $res["name"];
         $num_emails_sent = $res["num_emails_sent"];
 
         if ($res["num_emails_sent"] == NULL ) {
-            $res["num_emails_sent"] = 0; 
+            $res["num_emails_sent"] = 0;
         }
 
 		$tier_options = ["bronze", "silver", "gold", "platinum"];
 
         if(isset($_POST['deleteItem']))
         {
-            $SQL = singleRowExecute("DELETE FROM sponsor WHERE id = $id");
-
-            header("location: index.php");
+            $SQL = singleRowExecute("DELETE FROM Sponsor WHERE id = $id");
+            $ref = $_POST["referrer"];
+            header("location: $ref");
             exit;
         }
 
@@ -48,36 +50,39 @@
 			return $res;
 		}
 
-        $jobs = execute("SELECT * FROM job WHERE id = $id");
-                    
+        $jobs = execute("SELECT * FROM Job ".
+            "INNER JOIN Sponsor ON Sponsor.id=Job.sponsor_id ".
+            "WHERE Sponsor.id=$id");
+
         function getTableRow($row) {
 
-            return "<tr>".            //echo "<td>" "<a href='profile.php?id=".$row['id'] . "'>" . $row['name'] . "</a>" "</td>";
-            //echo "<td> <a href='sponsor_details.php?id=".$row['id'] . "'>".$row['name']."</a></td>"; //builds the link
-                "<td>" . $row['title'] . "</td>".
-                "<td>" . $row['city'] . "</td>".
-                "<td>" . $row['province'] . "</td>".
-                "<td>" . $row['pay_rate'] . "</td>".
+            return "<tr>".            
+                    "<td>" . $row['title'] . "</td>".
+                    "<td>" . $row['city'] . "</td>".
+                    "<td>" . $row['province'] . "</td>".
+                    "<td>" . $row['pay_rate'] . "</td>".
                 "</tr>";
         }        
     ?>
 
-    <h1> Details on <?php echo $res['name'] ?> </h1>
+    <br>
+    <h1> Sponsor: <?php echo $res['name'] ?> </h1>
+    <hr>
 
     <br>
     <div class="row centered">
         <div class="col-md">
             <form action="./update_sponsor.php" method ="GET" id="info">
 
-    		    <label for="sponsor_name">Sponsor Name: </label>
+    		    <label for="sponsor_name">Name: </label>
 		        <input type="text" name="sponsor_name" value="<?php echo $res['name'] ?>" required>      
                 <br><br>
 
-                <label for="sponsor_tier">Sponsor Tier: </label>
+                <label for="sponsor_tier">Tier: </label>
                 <?php echo buildSelect("sponsor_tier", $tier_options, $tier) ?>
                 <br><br>
 
-                <label for="num_emails_sent"># Emails Sent: </label>
+                <label for="num_emails_sent">Number of Emails Sent: </label>
 		        <input type="number" id="num_emails_sent" name="num_emails_sent" max = 5 value="<?php echo $res['num_emails_sent'] ?>" required>     
 
                 <br><br>               
@@ -86,13 +91,14 @@
 
                 <br><br>
 		        <input class="btn btn-success" type="submit" value="Submit" />
-                <a href="index.php" class="btn btn-warning">Cancel</a>
+                <?php echo "<a href='$referrer' class='btn btn-warning'>Cancel</a>" ?>
 
                 <?php echo "<input type='hidden' name='id' value='$id'>" ?>
             </form>
 
             <br><br>
-            <h4>They have the following jobs available</h4>
+            <h4>Available Jobs</h4>
+            <hr class="half-width">
             <br>
             <table>
                 <tr>
@@ -102,17 +108,24 @@
                     <th>Pay Rate</th>
                 </tr>
                 <?php 
+                    $cnt = 0;
                     while($row = $jobs->fetch()) {
+                        $cnt++;
                         echo getTableRow($row);
                     } 
-                ?>    
-            </table>   
+
+                    echo "</table>";
+
+                    if ($cnt == 0) {
+                        echo "<i>No jobs found</i>";
+                    } 
+                    
+                ?>
                 
             <br><br><br>
-                
-            <h5> Delete this company from the database?</h5>
             <form action="" method="post">
-                <input type="submit" name="deleteItem" value='delete' />
+                <?php echo "<input type='hidden' name='referrer' value='$referrer'>" ?>
+                <input type="submit" name="deleteItem" value='Delete Company' class="btn btn-danger" />
             </form>    
         </div>
     </div>

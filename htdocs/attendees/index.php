@@ -14,33 +14,30 @@
 	<?php
 		$students = execute("SELECT * FROM Attendee WHERE Attendee.type = 'Student' ");
 		$professionals = execute("SELECT * FROM Attendee WHERE Attendee.type = 'Professional' ");
-		$sponsors = execute("SELECT Attendee.first_name, Attendee.last_name,  Attendee.ID, sponsor.name  
-			FROM Attendee , sponsor WHERE Attendee.type = 'Sponsor' and Attendee.sponsor_ID = sponsor.id");
+		$sponsors = execute("SELECT Attendee.first_name, Attendee.last_name, Attendee.ID, Sponsor.name, Sponsor.id AS spons_id FROM Attendee INNER JOIN Sponsor ON  Attendee.sponsor_id=Sponsor.id WHERE Attendee.type = 'sponsor'");
+
 		$committee_options = execute("SELECT name FROM Subcommittee");
+
+		function getStudentRow($row) {
+			return "<tr>".
+					"<td>".$row["first_name"]."</td>".
+					"<td>".$row["last_name"]."</td>".
+					"<td><a href='./display_room.php?room_id=".$row["room_number"]."'>".$row["room_number"]."</a></td>".
+				"</tr>";
+		}
 
 		function getTableRow($row) {
 			return "<tr>".
-					"<td>".$row["id"]."</td>".
 					"<td>".$row["first_name"]."</td>".
 					"<td>".$row["last_name"]."</td>".
 				"</tr>";
 		}
 
-		function getstudentRow($row) {
-			return "<tr>".
-					"<td>".$row["id"]."</td>".
-					"<td>".$row["first_name"]."</td>".
-					"<td>".$row["last_name"]."</td>".
-					"<td> <a href='display_room.php?room_id=".$row['room_number'] . "'>".$row['room_number']."</a></td>". //builds the link
-					"</tr>";
-		}
-
 		function getSponsorRow($row) {
 			return "<tr>".
-					"<td>".$row["ID"]."</td>".
 					"<td>".$row["first_name"]."</td>".
 					"<td>".$row["last_name"]."</td>".
-					"<td>".$row["name"]."</td>".
+					"<td><a href='/sponsors/sponsor_details.php?id=".$row["spons_id"]."'>".$row["name"]."</td>".
 				"</tr>";
 		}
 
@@ -60,15 +57,13 @@
 			<hr>
 			<table>
 				<tr>
-					<th>ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Room Number</th>
-					<th></th>
 				</tr>
 				<?php
 					while ($row = $students->fetch()) {
-						echo getstudentRow($row);
+						echo getStudentRow($row);
 					}
 				?>
 			</table>
@@ -78,10 +73,8 @@
 			<hr>
 			<table>
 				<tr>
-					<th>ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th></th>
 				</tr>
 				<?php
 					while ($row = $professionals->fetch()) {
@@ -95,7 +88,6 @@
 			<hr>
 			<table>
 				<tr>
-					<th>ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Sponsor Name</th>
@@ -112,36 +104,36 @@
 	<hr>
 	<br>
 	<div class="row">
-		<div class='col-lg centered'>
-			<h5>Subcommittee <br><br>
-					<form action="./committees.php" method="GET">
-						<select name="subcommittee">
-							<?php
-								while ($next = $committee_options->fetch()) {
-									echo buildSelect($next);
-								}
-							?>
-						</select>
-						<br><br>
-						<input class="btn btn-success" type="submit" value="View" />
-					</form>
-			</h5>
+		<div class='col-lg align-items-center'>
+			<h5>View Subcommittee</h5>
+			<hr>
+			<form action="./committees.php" method="GET" class="text-center">
+				<select name="subcommittee" class="half">
+					<?php
+						while ($next = $committee_options->fetch()) {
+							echo buildSelect($next);
+						}
+					?>
+				</select>
+				<br><br>
+				<input class="btn btn-success" type="submit" value="View" />
+			</form>
+		</div>
+		<div class="col-lg centered">
+			<h5>View Room</h5>
+			<hr>
+			<form action="./display_room.php" method="GET">
+				<label for="room">Number</label>
+				<input type="text" name="room_id">
+				<br><br>
+				<input class="btn btn-success" type="submit" value="Submit" />
+			</form>
 		</div>
 	</div>
-	<hr>
-	<br>
-	<h5>Room</h5>
-	<form action="./display_room.php" method="GET">
-		<label for="room">Number</label>
-		<input type="text" name="room_id">
-		<br><br>
-		<input class="btn btn-success" type="submit" value="Submit" />
-	</form>
-	<hr>
-	<br>
+	<br><br>
 	<div class="row">
 		<div class='col-lg centered'>
-			<h5><a href='./add_attendee.php'> Add Attendees </a></h5>
+			<h5><a href='./add_attendee.php'>Add Attendee</a></h5>
 		</div>
 	</div>
 

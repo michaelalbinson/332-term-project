@@ -12,14 +12,14 @@
 			var sp = document.getElementById("sp");
 			var opt = document.getElementById("ty");
 			if (opt.value === "student") {
-				st.style.visibility = "visible";
-				sp.style.visibility = "hidden";
+				st.style.display = "block";
+				sp.style.display = "none";
 			} else if (opt.value === "sponsor") {
-				st.style.visibility = "hidden";
-				sp.style.visibility = "visible";
+				st.style.display = "none";
+				sp.style.display = "block";
 			} else {
-				st.style.visibility = "hidden";
-				sp.style.visibility = "hidden";
+				st.style.display = "none";
+				sp.style.display = "none";
 			}
 		}
 		
@@ -31,8 +31,13 @@
         ?>
 
         <?php
+        	$spons = execute("SELECT DISTINCT id, name FROM Sponsor");
 
-	?>
+
+        	function getOption($row) {
+        		echo "<option value='".$row["id"]."'>".$row["name"]."</option>";
+        	}
+		?>
 
 	<br>
 	<h1>Add Attendee</h1>
@@ -54,13 +59,21 @@
 		</select>
 		<br>
 		<div id="st">
+			<br>
 			<label id="st" for="room_num">Hotel Room Number</label>
 			<input id="st" type="text" name="room_num" value="">
 		</div>
-
 		<div id="sp">
-			<label id="sp" for="sponsor_id">Sponser ID</label>
-			<input id="sp" type="text" name="sponsor_id" value="">
+			<br>
+			<label id="sp" for="sponsor_id">Sponsor</label>
+			<select name="sponsor_id">
+				<option disabled="disabled" selected="selected">Select a Sponsor</option>
+				<?php 
+					while ($row = $spons->fetch()) {
+						echo getOption($row);
+					}
+				?>
+			</select>
 		</div>
 		<br>
 		<input class="btn btn-success" type="submit" value="Submit" />
