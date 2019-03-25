@@ -26,6 +26,15 @@
 				"</tr>";
 		}
 
+		function getstudentRow($row) {
+			return "<tr>".
+					"<td>".$row["id"]."</td>".
+					"<td>".$row["first_name"]."</td>".
+					"<td>".$row["last_name"]."</td>".
+					"<td> <a href='display_room.php?room_id=".$row['room_number'] . "'>".$row['room_number']."</a></td>". //builds the link
+					"</tr>";
+		}
+
 		function getSponsorRow($row) {
 			return "<tr>".
 					"<td>".$row["ID"]."</td>".
@@ -54,11 +63,12 @@
 					<th>ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
+					<th>Room Number</th>
 					<th></th>
 				</tr>
 				<?php
 					while ($row = $students->fetch()) {
-						echo getTableRow($row);
+						echo getstudentRow($row);
 					}
 				?>
 			</table>
