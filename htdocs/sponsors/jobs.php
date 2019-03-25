@@ -13,11 +13,12 @@
 	?>
 
     <?php
-        $jobs = execute("SELECT * FROM job");
+        $jobs = execute("SELECT * FROM Job, Sponsor WHERE job.sponsor_id = sponsor.id");
 
         function getTableRow($row) {
             return "<tr>".
              "<td>" . $row['title'] . "</td>".
+			 "<td> <a href='sponsor_details.php?id=".$row['id'] . "'>".$row['name']."</a></td>". //builds the link
              "<td>" . $row['city'] . "</td>".
              "<td>" . $row['province'] . "</td>".
              "<td>" . $row['pay_rate'] . "</td>".
@@ -33,6 +34,7 @@
                 <table>
                     <tr>
                         <th>Title</th>
+                        <th>Company</th>                        
                         <th>City</th>
                         <th>Province</th>
                         <th>Pay Rate</th>

@@ -16,6 +16,9 @@
         <label>Sponsor Name :</label>
         <input type="text" name="name" id="name" required="required" placeholder="Please Enter Name"/><br /><br />
 
+        <label>Sponsor Email :</label>
+        <input type="text" name="email" id="email" required="required" placeholder="Please Enter email"/><br /><br />
+
         <label>Sponsor Tier:</label>
         <select name="sponsor_tier">
             <option name="platinum" value="platinum">platinum</option>
@@ -26,7 +29,7 @@
 
         <br>
         <br>
-        <input type="submit" value="submit" name="submit"/><br />
+        <input class="btn btn-success" type="submit" value="submit" name="submit"/><br />
 
     </form>
 
@@ -39,9 +42,10 @@
         {
             $name = $_POST["name"];
             $tier = $_POST["sponsor_tier"];
+            $email = $_POST["email"];
 
-            singleRowExecute("INSERT INTO sponsor (name, tier, num_emails_sent) 
-            VALUES ('$name', '$tier', 0)");
+            singleRowExecute("INSERT INTO sponsor (name, tier, num_emails_sent, email_address) 
+            VALUES ('$name', '$tier', 0, '$email')");
             //$result = mysqli_query($conn, $SQL);
 
             header("location: index.php");

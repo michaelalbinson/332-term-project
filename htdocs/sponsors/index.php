@@ -11,9 +11,6 @@
 	<h1> This is a list of sponsors </h1> 
 	<br><br><br>
 
-	<input type= "button" onclick="location.href='new_sponsor.php';" value="Add a new Sponsor" />
-	<br><br><br>
-
 	<?php 
 		// Loads in database connection, called $connection
 		include_once("../config/database.php")
@@ -55,6 +52,12 @@
             } 
     	?>    
 	</table>			
+
+	<br><br><br>
+
+	<input class="btn btn-success" type= "button" onclick="location.href='new_sponsor.php';" value="Add a new Sponsor" />
+	<br><br>
+	<input class="btn btn-success" type= "button" onclick="location.href='jobs.php';" value="View all Jobs" />
 
 	<br><br><br><br><br><br><br>
 	<?php include_once("../components/footer.php")?>
